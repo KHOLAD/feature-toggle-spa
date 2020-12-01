@@ -1,0 +1,52 @@
+<div class="feature-dialog-container">
+    <h1 mat-dialog-title>{{dialogTile}}</h1>
+
+    <div mat-dialog-content>
+        <form [formGroup]="featureForm">
+            <div class="form-row">
+                <app-text-input
+                  formControlName="displayName"
+                  placeholder="Display name"
+                  [required]="true"></app-text-input>
+
+                <app-text-input
+                  formControlName="technicalName"
+                  placeholder="Technical name"
+                  [required]="true"></app-text-input>
+            </div>
+
+            <div class="form-row">
+                <app-text-input
+                  formControlName="description"
+                  placeholder="Description"
+                  [required]="true"></app-text-input>
+
+                <mat-checkbox
+                  color="primary"
+                  formControlName="inverted"
+                  class="text-grey">Inverted *</mat-checkbox>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field color="primary">
+                <mat-label>Expiration date</mat-label>
+                <input [min]="minDate" matInput [matDatepicker]="datePicker" formControlName="expiresOn">
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+          <div class="form-row">
+            <app-multi-select formControlName="customerIds" [list]="['1', '2']" [required]="true" placeholder="Customers IDs"></app-multi-select>
+          </div>
+        </form>
+    </div>
+
+    <div class="spacer"></div>
+
+
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button [disabled]="featureForm.invalid" mat-flat-button color="primary">Save</button>
+    </div>
+</div>

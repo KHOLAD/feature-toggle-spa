@@ -1,0 +1,50 @@
+<table mat-table [dataSource]="featureFlags" class="mat-elevation-z8" *ngIf="!isLoading; else loadingTmp">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inverted">
+        <th mat-header-cell *matHeaderCellDef> Inverted </th>
+        <td mat-cell *matCellDef="let element"> {{element.inverted}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="feature_flag">
+        <th mat-header-cell *matHeaderCellDef> Feature Flag </th>
+        <td mat-cell *matCellDef="let element">
+            <span [matTooltip]="element.technicalName">
+                {{element.displayName}}
+            </span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expiresOn">
+        <th mat-header-cell *matHeaderCellDef> Expiration date </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.expiresOn | date}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.description}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="onEdit.emit(element)" class="edit-icon" aria-hidden="false"
+                aria-label="Example home icon">create</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #loadingTmp>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

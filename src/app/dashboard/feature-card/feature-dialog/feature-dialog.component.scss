@@ -1,0 +1,37 @@
+.feature-dialog-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .spacer {
+        flex-grow: 1;
+    }
+
+    .mat-dialog-content {
+        height: 300px;
+    }
+
+    .dialog-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        app-text-input, mat-form-field {
+          width: 100%;
+            &:not(:last-child) {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .text-grey {
+        color: rgba(0,0,0,.54)
+    }
+}
