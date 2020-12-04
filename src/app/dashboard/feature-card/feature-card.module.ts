@@ -9,7 +9,7 @@ import { FeatureDialogModule } from './feature-dialog/feature-dialog.module';
   imports: [
     CommonModule,
     FeatureTableModule,
-    FeatureDialogModule
+    FeatureDialogModule,
   ],
   exports: [FeatureCardComponent]
 })

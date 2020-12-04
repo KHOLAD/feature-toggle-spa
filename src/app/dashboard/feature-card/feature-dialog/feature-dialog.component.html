@@ -24,7 +24,7 @@
                 <mat-checkbox
                   color="primary"
                   formControlName="inverted"
-                  class="text-grey">Inverted *</mat-checkbox>
+                  class="text-grey">Inverted</mat-checkbox>
             </div>
 
             <div class="form-row">
@@ -47,6 +47,9 @@
 
     <div mat-dialog-actions class="dialog-actions">
         <button mat-button mat-dialog-close>Cancel</button>
-        <button [disabled]="featureForm.invalid" mat-flat-button color="primary">Save</button>
+        <button
+          [disabled]="featureForm.pristine || featureForm.invalid || (isLoading$ | async)"
+          (click)="featureForm.valid && onSubmit()"
+          mat-flat-button color="primary">Save</button>
     </div>
 </div>

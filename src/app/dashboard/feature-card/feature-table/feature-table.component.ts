@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 import { Feature } from '../../../shared/models/feature';
 
 @Component({
@@ -9,23 +9,13 @@ import { Feature } from '../../../shared/models/feature';
 })
 export class FeatureTableComponent {
   @Input()
-  isLoading = false;
+  featureFlags: Feature[] = [];
 
   @Input()
-  featureFlags: Feature[] = [
-    {
-      id: "1",
-      displayName: "My feature",
-      technicalName: "my-feature",
-      expiresOn: new Date(),
-      description: "Description",
-      inverted: true,
-      customerIds: ["1", "2"]
-    }
-  ]
+  isLoading: boolean | null = false;
 
   @Output()
-  public onEdit = new EventEmitter<Feature>()
+  public editFeature = new EventEmitter<Feature>();
 
   displayedColumns: string[] = ['id', 'inverted', 'feature_flag', 'description', 'expiresOn', 'action'];
 }

@@ -15,6 +15,10 @@ import {AppCustomFieldDirective} from '../../directives/custom-form-field.direct
         Field is required.
       </mat-error>
 
+      <mat-error *ngIf="control?.hasError('pattern')">
+        Value can not have whitespaces.
+      </mat-error>
+
       <mat-error *ngIf="control?.hasError('minlength')">
         Value do not match min length of
         {{ ngControl.control?.errors?.minlength.actualLength}} /

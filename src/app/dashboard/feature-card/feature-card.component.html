@@ -1,1 +1,5 @@
-<app-feature-table [isLoading]="false" (onEdit)="editFeature($event)"></app-feature-table>
+<app-feature-table
+  [isLoading]="(isLoading$ | async)"
+  [featureFlags]="(features$ | async) || []"
+  (editFeature)="editFeature($event)"></app-feature-table>
+
