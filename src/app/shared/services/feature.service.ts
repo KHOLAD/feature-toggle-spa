@@ -4,6 +4,7 @@ import {Feature, FeatureAdapter} from '../models/feature';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {filter, finalize, map, tap} from 'rxjs/operators';
 import {apiUrl, httpOptions} from '../../shell/config';
+import {CustomerService} from './customer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FeatureService {
   private readonly featuresLoading$ = new ReplaySubject<boolean>(1);
   private readonly features$ = new BehaviorSubject<Feature[]>([]);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private customerService: CustomerService) {}
 
   get featuresLoadingState$(): Observable<boolean> {
     return this.featuresLoading$.asObservable();
@@ -23,7 +24,13 @@ export class FeatureService {
   }
 
   createFeature(feature: Feature): Observable<Feature> {
-    return this.httpClient.post<Feature>(`${apiUrl}/feature`, feature, httpOptions);
+    return this.httpClient.post<Feature>(`${apiUrl}/feature`, feature, httpOptions)
+      .pipe(
+        map((f) => {
+          this.customerService.customerFeatureMap.clear();
+          return f;
+        })
+      );
   }
 
   updateFeature(feature: Feature): Observable<Feature> {
