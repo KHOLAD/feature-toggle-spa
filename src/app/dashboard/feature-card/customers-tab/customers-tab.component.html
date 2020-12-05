@@ -1,0 +1,28 @@
+<ng-container *ngFor="let customer of customersList$ | async">
+  <mat-card>
+    <mat-expansion-panel hideToggle (opened)="expandCustomer(customer.id)">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="panel-title ellipsis">
+        <span [matTooltip]="customer?.name || ''">
+          {{customer?.name || ''}}
+        </span>
+        </mat-panel-title>
+        <mat-panel-description
+          class="ellipsis">
+          {{customer?.id || ''}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-container *ngIf="customerMap.has(customer.id)">
+        <div *ngFor="let feat of customerMap.get(customer.id)">
+          <mat-card class="customer-feature">
+            <span>Feature toggle name - {{feat.name}}</span>
+            <mat-slide-toggle [checked]="feat.active"
+                              color="primary"
+                              (toggleChange)="toggle(customer.id, feat.name)"></mat-slide-toggle>
+          </mat-card>
+        </div>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-card>
+</ng-container>

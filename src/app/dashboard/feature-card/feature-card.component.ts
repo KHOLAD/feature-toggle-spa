@@ -3,7 +3,7 @@ import { Feature } from 'src/app/shared/models/feature';
 import {MatDialog} from '@angular/material/dialog';
 import {FeatureDialogComponent} from './feature-dialog/feature-dialog.component';
 import {getFeatureDialogConfig} from './feature-dialog/dialog-config';
-import {FeatureService} from './services/feature.service';
+import {FeatureService} from '../../shared/services/feature.service';
 import {Observable, Subject} from 'rxjs';
 import {filter, mergeMap, switchMap, takeUntil} from 'rxjs/operators';
 

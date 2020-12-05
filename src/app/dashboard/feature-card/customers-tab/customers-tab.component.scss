@@ -1,0 +1,17 @@
+.panel-title {
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.customer-feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

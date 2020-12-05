@@ -2,8 +2,10 @@ import {Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Feature } from '../../../shared/models/feature';
-import {FeatureService} from '../services/feature.service';
+import {FeatureService} from '../../../shared/services/feature.service';
 import {Observable} from 'rxjs';
+import {CustomerService} from '../../../shared/services/customer.service';
+import {AvailableCustomers} from '../../../shared/models/customer';
 
 @Component({
   selector: 'app-feature-dialog',
@@ -15,6 +17,7 @@ export class FeatureDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Feature,
     private featureService: FeatureService,
+    private customerService: CustomerService,
     private dialogRef: MatDialogRef<FeatureDialogComponent>
   ) { }
 
@@ -22,6 +25,8 @@ export class FeatureDialogComponent implements OnInit {
   dialogTile = 'New Feature';
   minDate = new Date();
   isLoading$: Observable<boolean> = this.featureService.featuresLoadingState$;
+  customerList$: Observable<AvailableCustomers[]> = this.customerService.customersList$;
+  customersLoading$: Observable<boolean> = this.customerService.isLoading$;
 
   private static createFeatureForm(): FormGroup {
     return new FormGroup({
@@ -46,10 +51,13 @@ export class FeatureDialogComponent implements OnInit {
       this.featureForm.controls.customerIds.disable();
       this.featureForm.controls.technicalName.disable();
     }
+
+    this.customerService.getAvailableCustomers().subscribe();
   }
 
   public onSubmit(): void {
-    this.dialogRef.close({...this.featureForm.getRawValue(), customerIds: ['5fca2323bc25cfe5a18987fc']});
+    const value: Feature = this.featureForm.getRawValue();
+    this.dialogRef.close(value);
   }
 
 }

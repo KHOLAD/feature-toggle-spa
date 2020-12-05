@@ -37,7 +37,10 @@
             </div>
 
           <div class="form-row">
-            <app-multi-select formControlName="customerIds" [list]="['1', '2']" [required]="true" placeholder="Customers IDs"></app-multi-select>
+            <app-multi-select formControlName="customerIds"
+                              [isDisabled]="(customersLoading$ | async) || !!featureForm.get('id')?.value"
+                              [list]="(customerList$ | async) || []"
+                              [required]="true" placeholder="Customers IDs"></app-multi-select>
           </div>
         </form>
     </div>

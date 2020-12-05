@@ -1,5 +1,16 @@
-<app-feature-table
-  [isLoading]="(isLoading$ | async)"
-  [featureFlags]="(features$ | async) || []"
-  (editFeature)="editFeature($event)"></app-feature-table>
+<mat-tab-group>
+  <mat-tab label="FEATURES">
+    <ng-template matTabContent>
+      <app-feature-table
+        [isLoading]="(isLoading$ | async) || false"
+        [featureFlags]="(features$ | async) || []"
+        (editFeature)="editFeature($event)"></app-feature-table>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="CUSTOMERS">
+    <ng-template matTabContent>
+      <app-customers-tab></app-customers-tab>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
 

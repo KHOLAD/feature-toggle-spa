@@ -4,7 +4,7 @@ import {FeatureDialogComponent} from './feature-card/feature-dialog/feature-dial
 import {getFeatureDialogConfig} from './feature-card/feature-dialog/dialog-config';
 import {filter, mergeMap, switchMap, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {FeatureService} from './feature-card/services/feature.service';
+import {FeatureService} from '../shared/services/feature.service';
 
 @Component({
   selector: 'app-dashboard',
